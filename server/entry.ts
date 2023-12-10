@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { CONFIG } from "./config"
 import { app } from "./server"
-import { ModelWorkouts } from "./validatorsmodelstypes/Workout";
+import { ModelWorkouts } from "./validatorsmodelstypes/Workouts";
 
 
 (async function (){

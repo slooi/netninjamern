@@ -9,7 +9,8 @@
 	4) Delete /id
 	5) Patch /id
 
-
+# Remember
+1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`
 
 # QUESTIONS
 1 - is it possible to have packages locate din the root of monorepo?

@@ -8,6 +8,7 @@
 	3) POST					<= NO ID
 	4) Delete /id
 	5) Patch /id
+5) Need to use PURAL for file names too for consistency
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`

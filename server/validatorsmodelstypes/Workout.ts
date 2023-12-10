@@ -28,4 +28,4 @@ const SchemaWorkout = new mongoose.Schema<Workout>({
 })
 
 // Model
-mongoose.model("workouts",SchemaWorkout)
+export const ModelWorkouts = mongoose.model("workouts",SchemaWorkout)

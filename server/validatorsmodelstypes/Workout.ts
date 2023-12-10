@@ -15,17 +15,17 @@ export type Workout = z.infer<typeof ZodSchemaWorkout>
 const SchemaWorkout = new mongoose.Schema<Workout>({
 	title: {
 		type: String,
-		require: true
+		required: true
 	},
 	reps: {
 		type: Number,
-		require: true
+		required: true
 	},
 	load: {
 		type: Number,
-		require: true
+		required: true
 	}
-})
+},{timestamps:true})
 
 // Model
 export const ModelWorkouts = mongoose.model("workouts",SchemaWorkout)

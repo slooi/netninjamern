@@ -1,4 +1,4 @@
-# Mistakes
+# Mistakes/Learnings
 1) Remember to put server into server folder
 2) create a config file for env vars
 3) remember that you need tsconfig.json or else you won't get that nice type safety
@@ -9,6 +9,7 @@
 	4) Delete /id
 	5) Patch /id
 5) Need to use PURAL for file names too for consistency
+6) Use `127.0.0.1` instead of `localhost`. eg: mongodb://127.0.0.1:27017/workouts would work when `localhost` doesn't work on my pc
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`

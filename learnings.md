@@ -10,6 +10,7 @@
 	5) Patch /id
 5) Need to use PURAL for file names too for consistency
 6) Use `127.0.0.1` instead of `localhost`. eg: mongodb://127.0.0.1:27017/workouts would work when `localhost` doesn't work on my pc
+7) Add CENTRALIZED MIDDLEWARE. It must come AFTER all your .use() methods! Maybe even after .get/.post/.patch/etc methods too!
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`
@@ -26,4 +27,7 @@ However, I should probably use `slonik` in the future and a `sql` database like 
 2 - Install packages
 3 - Create middleware route. log `path` and `method` <= test
 4 - Create config and separate server and entry
-5 - Define routes
+5 - Define routes (GET all, GET id, POST, DELETE ID, PATCH ID)
+6 - Add database
+7 - Zod Schemas
+8 - Error handling

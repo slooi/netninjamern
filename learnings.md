@@ -11,6 +11,11 @@
 5) Need to use PURAL for file names too for consistency
 6) Use `127.0.0.1` instead of `localhost`. eg: mongodb://127.0.0.1:27017/workouts would work when `localhost` doesn't work on my pc
 7) Add CENTRALIZED MIDDLEWARE. It must come AFTER all your .use() methods! Maybe even after .get/.post/.patch/etc methods too!
+```
+app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+	...
+}
+```
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`

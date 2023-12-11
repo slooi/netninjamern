@@ -1,4 +1,5 @@
 import express from "express";
+import { ModelWorkouts } from "../validatorsmodelstypes/Workouts";
 
 const router = express.Router()
 
@@ -15,7 +16,7 @@ router.get(`/:id`,(req,res)=>{
 
 // POST
 router.post(`/`,(req,res)=>{
-	
+	// ModelWorkouts.create({})
 	res.status(200).json({msg:"POST workout"})
 })
 

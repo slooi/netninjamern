@@ -29,7 +29,7 @@ However, I should probably use `slonik` in the future and a `sql` database like 
 
 # STEPS (Remember to test while doing the below)
 1 - Create server repo
-2 - Install packages
+2 - Install packages & setup tsconfig.json
 3 - Create middleware route. log `path` and `method` <= test
 4 - Create config and separate server and entry
 5 - Define routes (GET all, GET id, POST, DELETE ID, PATCH ID)

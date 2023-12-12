@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import z from "zod";
 
 // Zod Schema
-export const ZodSchemaWorkout= z.object({
-	title:z.string(),
-	reps:z.number(),
-	load:z.number()
+export const ZodSchemaWorkout = z.object({
+	title: z.string(),
+	reps: z.number(),
+	load: z.number()
 })
 
 // Type
@@ -25,7 +25,7 @@ const SchemaWorkout = new mongoose.Schema<Workout>({
 		type: Number,
 		required: true
 	}
-},{timestamps:true})
+}, { timestamps: true })
 
 // Model
-export const ModelWorkouts = mongoose.model("workouts",SchemaWorkout)
+export const ModelWorkouts = mongoose.model("workouts", SchemaWorkout)

@@ -23,3 +23,11 @@
 // 	}
 // 	res.status(500).json()
 // }
+
+
+
+export class ErrorInvalidMongooseIDType extends Error{
+	constructor(){
+		super("Invalid mongoose id!")
+	}
+}

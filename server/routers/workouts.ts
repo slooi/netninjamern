@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { ModelWorkouts, ZodSchemaWorkout } from "../validatorsmodelstypes/Workouts";
 import { asyncNextCaller } from "../utils";
 import mongoose from "mongoose";
+import { ErrorInvalidMongooseIDType } from "../error";
 
 const router = express.Router()
 
@@ -19,9 +20,9 @@ router.get(`/:id`, asyncNextCaller(async (req, res) => {
 	console.log("req.params \t", req.params)
 
 	const { id } = req.params
-	if (mongoose.Types.ObjectId.isValid(id)){
-		throw new Error("")
-	}
+	// if (!mongoose.Types.ObjectId.isValid(id)){
+	// 	throw new ErrorInvalidMongooseIDType()
+	// }
 	return res.status(200).json(await ModelWorkouts.findById(id))
 }))
 

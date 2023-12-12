@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import { ModelWorkouts, ZodSchemaWorkout } from "../validatorsmodelstypes/Workouts";
 import { asyncNextCaller } from "../utils";
+import mongoose from "mongoose";
 
 const router = express.Router()
 
@@ -8,40 +9,38 @@ const router = express.Router()
 
 // GET all
 router.get(`/`, async (req, res) => {
-	res.status(200).json(await ModelWorkouts.find())
+	return res.status(200).json(await ModelWorkouts.find().sort({createdAt:-1}))
 })
 
 
 
 // GET id
 router.get(`/:id`, asyncNextCaller(async (req, res) => {
-	const { id } = req.params
 	console.log("req.params \t", req.params)
 
-	console.log('await ModelWorkouts.findById(id) \t', await ModelWorkouts.findById(id))
-
-	res.status(200).json({ msg: `GET workout: ${id}` })
+	const { id } = req.params
+	if (mongoose.Types.ObjectId.isValid(id)){
+		throw new Error("")
+	}
+	return res.status(200).json(await ModelWorkouts.findById(id))
 }))
 
 
 
 // POST
 router.post(`/`, asyncNextCaller(async (req, res, next) => {
-	const workout = await ModelWorkouts.create({ ...ZodSchemaWorkout.parse(req.body) })
-
-	console.log("await ModelWorkouts.find() \t", await ModelWorkouts.find())
-
-	res.status(200).json({ msg: workout })
+	return res.status(200).json(await ModelWorkouts.create({ ...ZodSchemaWorkout.parse(req.body) }))
 }))
 
 
 
 // DELETE
 router.delete("/:id", asyncNextCaller(async (req, res) => {
+	console.log("req.params \t", req.params)
 
 	const { id } = req.params
-	console.log("await ModelWorkouts.deleteOne(id) \t", await ModelWorkouts.deleteOne(id))
-	res.status(200).json({ msg: "DELETE workout: " + id })
+	const workout = await ModelWorkouts.deleteOne(id)
+	return res.status(200).json({"msg":"wai"})
 }))
 
 
@@ -52,11 +51,7 @@ router.patch("/:id", asyncNextCaller(async (req, res) => {
 
 	// READ worker
 	const workout = await ModelWorkouts.find(id)
-
-	// UPDATE worker
-	// workout.
-
-	res.status(200).json({ msg: "PATCH workout: " + id })
+	return res.status(200).json({ msg: "PATCH workout: " + id })
 }))
 
 

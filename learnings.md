@@ -29,6 +29,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 However, I should probably use `slonik` in the future and a `sql` database like `PostgreSQL` as I am always using a schema for my current use cases. 
 2 - Standardize error handling somehow. Look more into express 5. Look into custom linter to throw errors when receive async without `asyncErrorHandler` when inside of `app.get/post/patch/delete/etc`
 3 - Standardize json response messages. {error:...} or {data:...}
+4 - Find out why `express-async-errors` wasn't working for just this project
 
 # STEPS (Remember to test while doing the below)
 1 - Create server repo

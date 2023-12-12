@@ -16,6 +16,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 	...
 }
 ```
+8) Although i believe `process.on('unhandledRejection',...` can't be used by me for anything, I can use `process.on('uncaughtException',...` to log errors, do notifications and restarts when app fails in prod
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`

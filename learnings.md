@@ -26,6 +26,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 # Improvements for future projects
 1 - Mongoose is kinda annoying to use. It doesn't have typesafety so you can run into runtime errors. Like I accidentally spelt `require` instead of `required` and mongodb did NOT throw any errors... I should maybe use typegoose or prisma as they work with mongodb. `Prisma` seems like the best choice as I can alsouse it with sql and it's more popular in general.
 However, I should probably use `slonik` in the future and a `sql` database like `PostgreSQL` as I am always using a schema for my current use cases. 
+2 - Standardize error handling somehow. Look more into express 5. Look into custom linter to throw errors when receive async without `asyncErrorHandler` when inside of `app.get/post/patch/delete/etc`
 
 # STEPS (Remember to test while doing the below)
 1 - Create server repo

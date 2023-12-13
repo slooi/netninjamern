@@ -25,7 +25,7 @@ const SchemaWorkout = new mongoose.Schema<Workout>({
 		type: Number,
 		required: true
 	}
-}, { timestamps: true })
+}, { timestamps: true, strict: true })
 
 // Model
 export const ModelWorkouts = mongoose.model("workouts", SchemaWorkout)

@@ -36,8 +36,6 @@ router.post(`/`, asyncNextCaller(async (req, res, next) => {
 
 // DELETE
 router.delete("/:id", asyncNextCaller(async (req, res) => {
-	console.log("req.params \t", req.params)
-
 	const { id } = req.params
 	const workout = await ModelWorkouts.findByIdAndDelete(id)
 
@@ -52,11 +50,17 @@ router.delete("/:id", asyncNextCaller(async (req, res) => {
 
 // PATCH
 router.patch("/:id", asyncNextCaller(async (req, res) => {
+	console.log(req.body)
 	const { id } = req.params
 
 	// READ worker
-	const workout = await ModelWorkouts.find(id)
-	return res.status(200).json({ msg: "PATCH workout: " + id })
+	const workout = await ModelWorkouts.findOneAndUpdate({ _id: id }, { ...req.body })
+	if (workout) {
+		return res.status(200).json({ "data": workout })
+	} else {
+		return res.status(400).json({ error: "No workout with that id exists" })
+	}
+	// return res.status(200).json({ msg: "PATCH workout: " + id })
 }))
 
 

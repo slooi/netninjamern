@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import { routerWorkouts } from "./routers/workouts";
-import { KnownError, createErrorHandlerMiddleware, errorHandler, errorHandlerMiddleware } from "./errorHandling/error";
+import { KnownError, errorHandlerMiddleware, errorHandler, errorHandlerMiddleware } from "./errorHandling/error";
 import Zod from "zod";
 
 // Create express app
@@ -39,4 +39,9 @@ app.use((req, res, next) => {
 })
 
 // THIS MUST BE BELOW ALL OTHER MIDDLEWARE INCLUDING MIDDLEWARE ROUTES (IDK ABOUT just NORMAL ROUTES THOUGH)
-app.use(createErrorHandlerMiddleware([KnownError, Zod.ZodError]))
+app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+	errorHandlerMiddleware(error, req, res, next, [
+		KnownError,
+		[Zod.ZodError, () => res.send({ error: error })]
+	])
+})

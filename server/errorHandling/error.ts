@@ -65,25 +65,38 @@ export class KnownError extends Error {
 	}
 }
 
-export const createErrorHandlerMiddleware = <T extends ErrorConstructor>(knownErrors: Array<T>) => {
-	return <T extends Error>(error: T, req: Request, res: Response, next: NextFunction) => {
-		// Logs
-		console.log("####################### knownErrorHandler #######################")
-		console.log("req.path req.method:", req.path, req.method);
-		console.log("req.body:", req.body)
-		console.log(error)
+// | [ErrorConstructor, (error2: Error) => any]
 
-		// Handle all possible known errors
-		for (let i = 0; i < knownErrors.length; i++) {
-			const knownError = knownErrors[i]
-			console.log("error instanceof knownError", error instanceof knownError)
-			if (error instanceof knownError) {
+export const errorHandlerMiddleware = <T extends Error>(error: T, req: Request, res: Response, next: NextFunction, errorHandlers: Array<ErrorConstructor | [ErrorConstructor, () => any]>) => {
+	// Logs
+	console.log("####################### knownErrorHandler #######################")
+	console.log("req.path req.method:", req.path, req.method);
+	console.log("req.body:", req.body)
+	console.log(error)
+
+	// Handle all possible known errors
+	for (let i = 0; i < errorHandlers.length; i++) {
+		const errorHandler = errorHandlers[i]
+
+		if (Array.isArray(errorHandler)) {
+			// User has defined custom handler for this specific error type
+
+			const errorToListenFor = errorHandler[0]
+			const handler = errorHandler[1]
+			if (error instanceof errorToListenFor) {
+				return handler()
+			}
+		} else {
+			// User is using default handler for this error type
+
+			const errorToListenFor = errorHandler
+			if (error instanceof errorToListenFor) {
 				return res.json({ error: error.message })
 			}
 		}
-
-		// Handle unkown error
-		console.log("!!!!!!!!!!!!! unidentified middleware error :( !!!!!!!!!!!!!")
-		return res.json({ error500: error.message })
 	}
+
+	// Handle unkown error
+	console.log("!!!!!!!!!!!!! unidentified middleware error :( !!!!!!!!!!!!!")
+	return res.json({ error500: error.message })
 }

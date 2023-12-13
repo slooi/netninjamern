@@ -27,7 +27,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 			schema.pre('updateOne', function () { this.setOptions({ runValidators: true }) });
 		});
 ```
-11) Use `strict:true` when defining mongoose schema so users can't add more fields on update
+11) Use `strict:true` or `strict:"throw"` when defining mongoose schema so users can't add more fields on update
 ```
 const SchemaWorkout = new mongoose.Schema<Workout>({
 	title: {
@@ -42,7 +42,7 @@ const SchemaWorkout = new mongoose.Schema<Workout>({
 		type: Number,
 		required: true
 	}
-}, { timestamps: true, strict: true })
+}, { timestamps: true, strict: "throw" })
 ```
 
 

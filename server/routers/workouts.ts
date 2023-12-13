@@ -2,7 +2,8 @@ import express, { NextFunction, Request, Response } from "express";
 import { ModelWorkouts, ZodSchemaWorkout } from "../validatorsmodelstypes/Workouts";
 import { asyncNextCaller } from "../utils";
 import mongoose from "mongoose";
-import { ErrorInvalidMongooseIDType } from "../error";
+import { KnownError } from "../errorHandling/error";
+
 
 const router = express.Router()
 
@@ -10,7 +11,7 @@ const router = express.Router()
 
 // GET all
 router.get(`/`, async (req, res) => {
-	return res.status(200).json(await ModelWorkouts.find().sort({createdAt:-1}))
+	return res.status(200).json(await ModelWorkouts.find().sort({ createdAt: -1 }))
 })
 
 
@@ -20,9 +21,9 @@ router.get(`/:id`, asyncNextCaller(async (req, res) => {
 	console.log("req.params \t", req.params)
 
 	const { id } = req.params
-	// if (!mongoose.Types.ObjectId.isValid(id)){
-	// 	throw new ErrorInvalidMongooseIDType()
-	// }
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		throw new KnownError("InvalidMongooseIdType")
+	}
 	return res.status(200).json(await ModelWorkouts.findById(id))
 }))
 
@@ -41,7 +42,7 @@ router.delete("/:id", asyncNextCaller(async (req, res) => {
 
 	const { id } = req.params
 	const workout = await ModelWorkouts.deleteOne(id)
-	return res.status(200).json({"msg":"wai"})
+	return res.status(200).json({ "msg": "wai" })
 }))
 
 

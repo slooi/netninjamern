@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import { routerWorkouts } from "./routers/workouts";
-import { KnownError, errorHandlerMiddleware, errorHandler, errorHandlerMiddleware } from "./errorHandling/error";
+import { KnownError, errorHandlerMiddleware } from "./errorHandling/error";
 import Zod from "zod";
 
 // Create express app

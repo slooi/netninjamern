@@ -25,7 +25,6 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 			schema.pre('findOneAndUpdate', function () { this.setOptions({ runValidators: true }) });
 			schema.pre('updateMany', function () { this.setOptions({ runValidators: true }) });
 			schema.pre('updateOne', function () { this.setOptions({ runValidators: true }) });
-			schema.pre("findOneAndDelete", function () { this.setOptions({ runValidators: true }) })
 		});
 ```
 

@@ -15,7 +15,6 @@ import { ModelWorkouts } from "./validatorsmodelstypes/Workouts";
 			schema.pre('findOneAndUpdate', function () { this.setOptions({ runValidators: true }) });
 			schema.pre('updateMany', function () { this.setOptions({ runValidators: true }) });
 			schema.pre('updateOne', function () { this.setOptions({ runValidators: true }) });
-			schema.pre("findOneAndDelete", function () { this.setOptions({ runValidators: true }) })
 		});
 
 

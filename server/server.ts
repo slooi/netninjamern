@@ -43,5 +43,8 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 	errorHandlerMiddleware(error, req, res, next, [
 		KnownError,
 		[Zod.ZodError, () => res.send({ error: error })]
-	])
+	],
+		() => res.json({ error: error.message }),
+		() => res.json({ error500: error.message })
+	)
 })

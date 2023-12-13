@@ -67,9 +67,9 @@ export class KnownError extends Error {
 
 // | [ErrorConstructor, (error2: Error) => any]
 
-export const errorHandlerMiddleware = <T extends Error>(error: T, req: Request, res: Response, next: NextFunction, errorHandlers: Array<ErrorConstructor | [ErrorConstructor, () => any]>) => {
+export const errorHandlerMiddleware = <T extends Error>(error: T, req: Request, res: Response, next: NextFunction, errorHandlers: Array<ErrorConstructor | [ErrorConstructor, () => any]>, defaultErrorHandler: (...any: any) => any, unspecifiedErrorHandler: (...any: any) => any) => {
 	// Logs
-	console.log("####################### knownErrorHandler #######################")
+	console.log("####################### MIDDLEWARE ERROR HANDLER #######################")
 	console.log("req.path req.method:", req.path, req.method);
 	console.log("req.body:", req.body)
 	console.log(error)
@@ -84,6 +84,7 @@ export const errorHandlerMiddleware = <T extends Error>(error: T, req: Request, 
 			const errorToListenFor = errorHandler[0]
 			const handler = errorHandler[1]
 			if (error instanceof errorToListenFor) {
+				console.log("####################### CUSTOM error handler used #######################")
 				return handler()
 			}
 		} else {
@@ -91,12 +92,13 @@ export const errorHandlerMiddleware = <T extends Error>(error: T, req: Request, 
 
 			const errorToListenFor = errorHandler
 			if (error instanceof errorToListenFor) {
-				return res.json({ error: error.message })
+				console.log("####################### DEFAULT error handler used #######################")
+				return defaultErrorHandler()
 			}
 		}
 	}
 
-	// Handle unkown error
-	console.log("!!!!!!!!!!!!! unidentified middleware error :( !!!!!!!!!!!!!")
-	return res.json({ error500: error.message })
+	// Handle unknown error
+	console.log("!!!!!!!!!!!!! UNIDENTIFIED middleware error :( !!!!!!!!!!!!!")
+	return unspecifiedErrorHandler()
 }

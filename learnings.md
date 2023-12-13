@@ -17,6 +17,19 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 }
 ```
 8) Although i believe `process.on('unhandledRejection',...` can't be used by me for anything, I can use `process.on('uncaughtException',...` to log errors, do notifications and restarts when app fails in prod
+9) Remember to use dependency injection to separate library logic from application logic in error handler!
+10) UseTurn on mongoose validation on various method!
+```
+		// Enable mongoose vaidation
+		mongoose.plugin(schema => {
+			schema.pre('findOneAndUpdate', function () { this.setOptions({ runValidators: true }) });
+			schema.pre('updateMany', function () { this.setOptions({ runValidators: true }) });
+			schema.pre('updateOne', function () { this.setOptions({ runValidators: true }) });
+			schema.pre("findOneAndDelete", function () { this.setOptions({ runValidators: true }) })
+		});
+```
+
+
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`

@@ -21,9 +21,7 @@ router.get(`/:id`, asyncNextCaller(async (req, res) => {
 	console.log("req.params \t", req.params)
 
 	const { id } = req.params
-	if (!mongoose.Types.ObjectId.isValid(id)) {
-		throw new KnownError("InvalidMongooseIdType")
-	}
+	if (!mongoose.Types.ObjectId.isValid(id)) throw new KnownError("InvalidMongooseIdType")
 	return res.status(200).json(await ModelWorkouts.findById(id))
 }))
 
@@ -41,8 +39,13 @@ router.delete("/:id", asyncNextCaller(async (req, res) => {
 	console.log("req.params \t", req.params)
 
 	const { id } = req.params
-	const workout = await ModelWorkouts.deleteOne(id)
-	return res.status(200).json({ "msg": "wai" })
+	const workout = await ModelWorkouts.findByIdAndDelete(id)
+
+	if (workout) {
+		return res.status(200).json({ "data": workout })
+	} else {
+		return res.status(400).json({ error: "No workout with that id exists" })
+	}
 }))
 
 

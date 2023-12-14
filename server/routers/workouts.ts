@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import { ModelWorkouts, ZodSchemaWorkout } from "../validatorsmodelstypes/Workouts";
-import { asyncNextCaller } from "../utils";
+import { asyncNextCaller } from "../utils/expressUtils";
 import mongoose from "mongoose";
 import { KnownError } from "../errorHandling/error";
 

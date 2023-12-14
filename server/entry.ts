@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { CONFIG } from "./config"
+import { CONFIG } from "./config/config"
 import { app } from "./server"
 import { ModelWorkouts } from "./validatorsmodelstypes/Workouts";
 

@@ -18,7 +18,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 ```
 8) Although i believe `process.on('unhandledRejection',...` can't be used by me for anything, I can use `process.on('uncaughtException',...` to log errors, do notifications and restarts when app fails in prod
 9) Remember to use dependency injection to separate library logic from application logic in error handler!
-10) UseTurn on mongoose validation on various method!
+10) Use mongoose validation on various method!
 ```
 		// Enable mongoose vaidation
 		mongoose.plugin(schema => {
@@ -68,7 +68,14 @@ export default defineConfig({
 However, I should probably use `slonik` in the future and a `sql` database like `PostgreSQL` as I am always using a schema for my current use cases. 
 2 - Standardize error handling somehow. Look more into express 5. Look into custom linter to throw errors when receive async without `asyncErrorHandler` when inside of `app.get/post/patch/delete/etc`
 3 - Standardize json response messages. {error:...} or {data:...}
-4 - Find out why `express-async-errors` wasn't working for just this project
+4 - Find out why `express-async-errors` wasn't working for just this 
+5) Improve config code to reduce redundancy. I don't want to specify the variables both in `.env` AND in `config.ts` as it's error prone and tedious
+```
+export const CONFIG = {
+	PORT: loadEnvironmentVariable(process.env.PORT),
+	MONGO_URL: loadEnvironmentVariable(process.env.MONGO_URL)
+}
+```
 
 # STEPS (Remember to test while doing the below)
 1 - Create server repo

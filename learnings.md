@@ -44,6 +44,17 @@ const SchemaWorkout = new mongoose.Schema<Workout>({
 	}
 }, { timestamps: true, strict: "throw" })
 ```
+12) When using vite add `host: "0.0.0.0"` and `server.proxy`
+```
+export default defineConfig({
+	plugins: [react()],
+	server: {
+		host: "0.0.0.0",
+		proxy: { "/api": "http://127.0.0.1:8000" }
+	}
+})
+```
+
 
 
 # Remember
@@ -68,3 +79,15 @@ However, I should probably use `slonik` in the future and a `sql` database like 
 6 - Add database
 7 - Zod Schemas
 8 - Error handling
+9 - Test error handling and database work correctly!
+10 - Add vite into `client/` folder
+11 - Edit vite config so proxy points to your 
+```
+export default defineConfig({
+	plugins: [react()],
+	server: {
+		host: "0.0.0.0",
+		proxy: { "/api": "http://127.0.0.1:8000" }
+	}
+})
+```

@@ -40,7 +40,7 @@ router.delete("/:id", asyncNextCaller(async (req, res) => {
 	const workout = await ModelWorkouts.findByIdAndDelete(id)
 
 	if (workout) {
-		return res.status(200).json({ "data": workout })
+		return res.status(200).json({ data: workout })
 	} else {
 		return res.status(400).json({ error: "No workout with that id exists" })
 	}

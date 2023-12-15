@@ -31,7 +31,7 @@ const Home = () => {
 		<>
 			<h1>Home</h1>
 			{
-				workouts.map(workout => (<h1 key={workout._id}>{workout.load}</h1>))
+				workouts.map(workout => (<h1 key={workout._id}>{workout.title} {workout.load} {workout.reps}</h1>))
 			}
 
 		</>

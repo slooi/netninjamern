@@ -8,6 +8,16 @@ export const ZodSchemaWorkout = z.object({
 	load: z.number()
 })
 
+// .strict()
+// try {
+// 	const validatedData = ZodSchemaWorkout.parse({ title: "hi", reps: 1, load: 2, extraField: "ahaha" });
+// 	console.log("Validation successful:");
+// } catch (err) {
+// 	console.error("Validation failed:");
+// }
+
+
+
 // Type
 export type Workout = z.infer<typeof ZodSchemaWorkout>
 
@@ -26,6 +36,15 @@ const SchemaWorkout = new mongoose.Schema<Workout>({
 		required: true
 	}
 }, { timestamps: true, strict: "throw" })
+
+
+
+
+
+
+
+
+
 
 // Model
 export const ModelWorkouts = mongoose.model("workouts", SchemaWorkout)

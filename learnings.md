@@ -54,7 +54,7 @@ export default defineConfig({
 	}
 })
 ```
-
+13) The transpiled server still needs `node_modules/`. Thus `node_modules/` must be defined in the same directory or a in a parent directory. Otherwise I'll have to copy the `package.json` as well as the `.env` file into the `dist/` folder every single time so `dist/server/entry.js` can run......
 
 
 # Remember
@@ -76,6 +76,7 @@ export const CONFIG = {
 	MONGO_URL: loadEnvironmentVariable(process.env.MONGO_URL)
 }
 ```
+6) Allow easy BUILD and testing of PROD version. => This means having a `src/` and `dist/` as well as the `node_modules/` in root of project. Note you will have to have to make a new custom `tsconfig.json` for the server as the client already has `jsconfig.json` due to vite. Will have to change vite's `public/` folder to be located like so `dist/public`. Ultimately causing dist to look like: `dist/public` + `dist/client` + `dist/server/`
 
 # STEPS (Remember to test while doing the below)
 1 - Create server repo

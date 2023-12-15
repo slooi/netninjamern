@@ -15,13 +15,15 @@ export const app = express();
 
 
 
-const wrapResponseData = (req, res, next) => {
+const wrapResponseData = (req: Request, res: Response, next: NextFunction) => {
 	const originalJson = res.json.bind(res);
-	res.json = (data: any) => {
+
+	// Update the res.json assignment
+	res.json = function (this: Response<any, Record<string, any>>, data: any): Response<any, Record<string, any>> {
 		if (!("error" in data || "error500" in data)) {
-			data = { data: data }
+			data = { data: data };
 		}
-		originalJson(data);
+		return originalJson.call(this, data);
 	};
 
 	next();

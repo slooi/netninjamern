@@ -2,6 +2,8 @@ import express, { NextFunction, Request, Response } from "express";
 import { routerWorkouts } from "./routers/workouts";
 import { KnownError, errorHandlerMiddleware } from "./errorHandling/error";
 import Zod from "zod";
+import path from "path"
+import { CONFIG } from "./config/config";
 
 // Create express app
 export const app = express();
@@ -20,6 +22,21 @@ app.use((req, res, next) => {
 	next();
 });
 
+
+if (CONFIG.NODE_ENV === "production") {
+	console.log("### code is running in PRODUCTION mode ###")
+
+	const clientPath = path.join(__dirname, "..", "client")
+	app.use(express.static(clientPath));
+	app.get("/", (req, res) => {
+		res.sendFile(path.join(clientPath, "index.html"))
+	})
+} else {
+	console.log("### code is running in DEVELOPMENT mode ###")
+	app.get("/", (req, res) => {
+		res.send("Server is in DEVELOPMENT mode. Set `NODE_ENV=production` to run in production")
+	})
+}
 
 
 // Routes

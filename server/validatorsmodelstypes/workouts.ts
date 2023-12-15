@@ -6,7 +6,7 @@ export const ZodSchemaWorkout = z.object({
 	title: z.string(),
 	reps: z.number(),
 	load: z.number()
-})
+}).strict()
 
 // .strict()
 // try {
@@ -38,7 +38,12 @@ const SchemaWorkout = new mongoose.Schema<Workout>({
 }, { timestamps: true, strict: "throw" })
 
 
-
+export const ZodSchemaMongooseTypes = z.object({
+	createdAt: z.string(), // Assuming createdAt is a string (e.g., ISO date)
+	updatedAt: z.string(),
+	_id: z.string(),
+	__v: z.number(),
+});
 
 
 

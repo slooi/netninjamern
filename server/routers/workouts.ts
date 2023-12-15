@@ -22,14 +22,18 @@ router.get(`/:id`, asyncNextCaller(async (req, res) => {
 
 	const { id } = req.params
 	if (!mongoose.Types.ObjectId.isValid(id)) throw new KnownError("InvalidMongooseIdType")
-	return res.status(200).json(await ModelWorkouts.findById(id))
+
+	const workout = await ModelWorkouts.findById(id)
+	if (!workout) throw new KnownError("Workout does not exist!")
+
+	return res.status(200).json()
 }))
 
 
 
 // POST
 router.post(`/`, asyncNextCaller(async (req, res, next) => {
-	return res.status(200).json(await ModelWorkouts.create({ ...ZodSchemaWorkout.parse(req.body) }))
+	return res.status(200).json(await ModelWorkouts.create({ ...req.body }))
 }))
 
 
@@ -40,7 +44,7 @@ router.delete("/:id", asyncNextCaller(async (req, res) => {
 	const workout = await ModelWorkouts.findByIdAndDelete(id)
 
 	if (workout) {
-		return res.status(200).json({ data: workout })
+		return res.status(200).json(workout)
 	} else {
 		throw new KnownError("No workout with that id exists")
 	}
@@ -56,11 +60,10 @@ router.patch("/:id", asyncNextCaller(async (req, res) => {
 	// READ worker
 	const workout = await ModelWorkouts.findOneAndUpdate({ _id: id }, { ...req.body })
 	if (workout) {
-		return res.status(200).json({ data: workout })
+		return res.status(200).json(workout)
 	} else {
 		throw new KnownError("No workout with that id exists")
 	}
-	// return res.status(200).json({ msg: "PATCH workout: " + id })
 }))
 
 

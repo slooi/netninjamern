@@ -10,9 +10,9 @@ const router = express.Router()
 
 
 // GET all
-router.get(`/`, async (req, res) => {
+router.get(`/`, asyncNextCaller(async (req, res) => {
 	return res.status(200).json(await ModelWorkouts.find().sort({ createdAt: -1 }))
-})
+}))
 
 
 
@@ -42,7 +42,7 @@ router.delete("/:id", asyncNextCaller(async (req, res) => {
 	if (workout) {
 		return res.status(200).json({ data: workout })
 	} else {
-		return res.status(400).json({ error: "No workout with that id exists" })
+		throw new KnownError("No workout with that id exists")
 	}
 }))
 
@@ -56,9 +56,9 @@ router.patch("/:id", asyncNextCaller(async (req, res) => {
 	// READ worker
 	const workout = await ModelWorkouts.findOneAndUpdate({ _id: id }, { ...req.body })
 	if (workout) {
-		return res.status(200).json({ "data": workout })
+		return res.status(200).json({ data: workout })
 	} else {
-		return res.status(400).json({ error: "No workout with that id exists" })
+		throw new KnownError("No workout with that id exists")
 	}
 	// return res.status(200).json({ msg: "PATCH workout: " + id })
 }))

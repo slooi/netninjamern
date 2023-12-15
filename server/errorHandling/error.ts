@@ -57,8 +57,8 @@ process.on('uncaughtException', (error: Error) => {
 type ErrorConstructor = new (...any: any[]) => Error
 
 export class KnownError extends Error {
-	constructor(ProjectKnownErrorMsgs: ProjectKnownErrorMsgs) {
-		super(ProjectKnownErrorMsgs)
+	constructor(message: string | undefined) {
+		super(message)
 	}
 	returnMessage() {
 		return this.message

@@ -2,7 +2,7 @@
   "name": "mernnetninja",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "entry.js",
   "scripts": {
     "dev": "tsx watch entry",
     "build": "tsc",

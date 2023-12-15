@@ -11,7 +11,7 @@
 5) Need to use PURAL for file names too for consistency
 6) Use `127.0.0.1` instead of `localhost`. eg: mongodb://127.0.0.1:27017/workouts would work when `localhost` doesn't work on my pc
 7) Add CENTRALIZED MIDDLEWARE. It must come AFTER all your .use() methods! Maybe even after .get/.post/.patch/etc methods too!
-```
+```ts
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 	...
 }
@@ -19,7 +19,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 8) Although i believe `process.on('unhandledRejection',...` can't be used by me for anything, I can use `process.on('uncaughtException',...` to log errors, do notifications and restarts when app fails in prod
 9) Remember to use dependency injection to separate library logic from application logic in error handler!
 10) Use mongoose validation on various method!
-```
+```ts
 		// Enable mongoose vaidation
 		mongoose.plugin(schema => {
 			schema.pre('findOneAndUpdate', function () { this.setOptions({ runValidators: true }) });
@@ -28,7 +28,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 		});
 ```
 11) Use `strict:true` or `strict:"throw"` when defining mongoose schema so users can't add more fields on update
-```
+```ts
 const SchemaWorkout = new mongoose.Schema<Workout>({
 	title: {
 		type: String,
@@ -45,7 +45,7 @@ const SchemaWorkout = new mongoose.Schema<Workout>({
 }, { timestamps: true, strict: "throw" })
 ```
 12) When using vite add `host: "0.0.0.0"` and `server.proxy`
-```
+```ts
 export default defineConfig({
 	plugins: [react()],
 	server: {
@@ -56,11 +56,19 @@ export default defineConfig({
 ```
 13) The transpiled server still needs `node_modules/`. Thus `node_modules/` must be defined in the same directory or a in a parent directory. Otherwise I'll have to copy the `package.json` as well as the `.env` file into the `dist/` folder every single time so `dist/server/entry.js` can run......
 14) If you separate your code like `<root>/client` & `<root>/server` each with their package.json it means won't have intellisense to add the types which is quite annoying when you have to manually routes to import types
-```
+```ts
 import {Workout} from "../../../../server/validatorsmodelstypes/workouts"
 
 const Home = () => {
 	const [workouts, setWorkouts] = useState<Workout>([])
+```
+15) When using zod, turn use `.strict()` so it throws errors if the user specifies more fields than intended
+```ts
+export const ZodSchemaWorkout = z.object({
+	title: z.string(),
+	reps: z.number(),
+	load: z.number()
+}).strict()
 ```
 
 # Remember

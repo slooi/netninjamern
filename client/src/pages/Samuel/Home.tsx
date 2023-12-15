@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react"
+import { ZodSchemaMongooseTypes, Workout, ZodSchemaWorkout } from "../../../../server/validatorsmodelstypes/workouts"
+import { z } from "zod";
+
+
+const ExtendedZodSchemaWorkout = ZodSchemaWorkout.merge(ZodSchemaMongooseTypes);
+const ExtendedZodSchemaWorkoutArray = z.array(ExtendedZodSchemaWorkout);
 
 const Home = () => {
-	const [workouts, setWorkouts] = useState([])
+	const [workouts, setWorkouts] = useState<z.infer<typeof ExtendedZodSchemaWorkoutArray>>([])
 
 	useEffect(() => {
 		fetch("/api/workouts")
@@ -9,8 +15,10 @@ const Home = () => {
 			.then(res => {
 				console.log(res);
 
+
 				if ("data" in res) {
-					setWorkouts(res.data)
+					const workout = ExtendedZodSchemaWorkoutArray.parse(res.data)
+					setWorkouts(workout)
 				} else {
 					throw new Error("Error response did not contain data")
 				}
@@ -22,7 +30,9 @@ const Home = () => {
 	return (
 		<>
 			<h1>Home</h1>
-
+			{
+				workouts.map(workout => (<h1 key={workout._id}>{workout.load}</h1>))
+			}
 
 		</>
 	)

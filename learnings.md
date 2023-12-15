@@ -55,7 +55,13 @@ export default defineConfig({
 })
 ```
 13) The transpiled server still needs `node_modules/`. Thus `node_modules/` must be defined in the same directory or a in a parent directory. Otherwise I'll have to copy the `package.json` as well as the `.env` file into the `dist/` folder every single time so `dist/server/entry.js` can run......
+14) If you separate your code like `<root>/client` & `<root>/server` each with their package.json it means won't have intellisense to add the types which is quite annoying when you have to manually routes to import types
+```
+import {Workout} from "../../../../server/validatorsmodelstypes/workouts"
 
+const Home = () => {
+	const [workouts, setWorkouts] = useState<Workout>([])
+```
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`

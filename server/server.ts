@@ -12,6 +12,22 @@ export const app = express();
 // #######################################################################
 // 							MIDDLEWARE
 // #######################################################################
+
+
+
+const wrapResponseData = (req, res, next) => {
+	const originalJson = res.json.bind(res);
+	res.json = (data: any) => {
+		if (!("error" in data || "error500" in data)) {
+			data = { data: data }
+		}
+		originalJson(data);
+	};
+
+	next();
+};
+app.use(wrapResponseData);
+
 app.use(express.json())
 
 

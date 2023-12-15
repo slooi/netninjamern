@@ -17,7 +17,7 @@
 
 5) `cd ../server`
 
-6) `npm run build` This will produce a transpiled version of the express server into `dist/client/`
+6) `npm run build` This will produce a transpiled version of the express server into `dist/server/`
 
 7) Copy the server's `.env` and `package.json` into the `dist` folder. NOTE: WE ARE COPYING THE `.env` FILE AND THUS THIS SHOULD ONLY BE USED FOR TESTING PURPOSES!
 

@@ -6,12 +6,13 @@ dotenv.config();
 // Export Config
 export const CONFIG = {
 	PORT: loadEnvironmentVariable(process.env.PORT),
-	MONGO_URL: loadEnvironmentVariable(process.env.MONGO_URL)
+	MONGO_URL: loadEnvironmentVariable(process.env.MONGO_URL),
+	NODE_ENV: loadEnvironmentVariable(process.env.NODE_ENV)
 }
 
 
 // HELPER FUNCTION
-function loadEnvironmentVariable<T>(environmentVariable:T){
+function loadEnvironmentVariable<T>(environmentVariable: T) {
 	if (!environmentVariable)
 		throw new Error("Error: environment variable is NOT defined")
 	return environmentVariable

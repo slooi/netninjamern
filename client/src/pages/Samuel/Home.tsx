@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { ZodSchemaMongooseTypes, Workout, ZodSchemaWorkout } from "../../../../server/validatorsmodelstypes/workouts"
 import { z } from "zod";
+import WorkoutForm from "./WorkoutForm";
 
 
 const ExtendedZodSchemaWorkout = ZodSchemaWorkout.merge(ZodSchemaMongooseTypes);
@@ -30,6 +31,7 @@ const Home = () => {
 	return (
 		<>
 			<h1>Home</h1>
+			<WorkoutForm />
 			{
 				workouts.map(workout => (<h1 key={workout._id}>{workout.title} {workout.load} {workout.reps}</h1>))
 			}

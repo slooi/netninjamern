@@ -80,6 +80,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 		[Zod.ZodError, () => res.send({ error: error })]
 	],
 		() => res.status(400).json({ error: error.message }),
-		() => res.status(500).json({ error500: error.message })
+		() => res.status(500).json({ error: error.message })
 	)
 })

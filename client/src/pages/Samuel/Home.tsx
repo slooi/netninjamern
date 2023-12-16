@@ -35,7 +35,20 @@ const Home = () => {
 			<h1>Home</h1>
 			<WorkoutForm />
 			{
-				m_workouts.map(workout => (<h1 key={workout._id}>{workout.title} {workout.load} {workout.reps}</h1>))
+				m_workouts.map(workout => (
+
+					<div key={workout._id}>
+						<h3>
+							{workout.title}
+						</h3>
+						<div>
+							<ul>
+								<li>load:{workout.load}</li>
+								<li>reps:{workout.reps}</li>
+							</ul>
+						</div>
+					</div>
+				))
 			}
 
 		</>

@@ -93,7 +93,24 @@ export const ZodSchemaWorkout = z.object({
 			load: load,
 		}
 ```
-
+19) SOLVED REACT NOT RELOAD/REFRESH BUG! The ORDER of destructing the array matters! If you destructure BEFORE the new variable it works but if you do it after it does NOT work for some reason. This is the correct solution:
+```ts
+// REDUCER
+const workoutsReducer = (state: M_WorkoutsState, action: M_WorkoutActions) => {
+	switch (action.type) {
+		case "SET_WORKOUTS":
+			return {
+				m_workouts: action.payload
+			}
+		case "CREATE_WORKOUT":
+			return {
+				m_workouts: [action.payload, ...state.m_workouts]
+			}
+		default:
+			return state
+	}
+}
+```
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`

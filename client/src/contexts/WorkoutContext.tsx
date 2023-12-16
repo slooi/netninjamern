@@ -1,7 +1,7 @@
 import { Dispatch, createContext, useReducer } from "react"
 import { ReactNode } from 'react';
 
-import { M_Workout } from "../../../../server/validatorsmodelstypes/workouts"
+import { M_Workout } from "../../../server/validatorsmodelstypes/workouts"
 
 // ##################################### SETUP ##############################
 
@@ -30,7 +30,7 @@ const workoutsReducer = (state: M_WorkoutsState, action: M_WorkoutActions) => {
 			}
 		case "CREATE_WORKOUT":
 			return {
-				m_workouts: [...state.m_workouts, action.payload]
+				m_workouts: [action.payload, ...state.m_workouts]
 			}
 		default:
 			return state

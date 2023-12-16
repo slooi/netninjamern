@@ -41,7 +41,9 @@ const Home = () => {
 
 			console.log("json \t", json)
 			if ("data" in json) {
-				console.log("DELETE json.data \t", json.data)
+				console.log("DELETE json.data \t",)
+				const m_workout = ZodSchemaWorkoutMongoose.parse(json.data)
+				dispatch({ type: "DELETE_WORKOUT", payload: m_workout })
 			} else {
 				throw new Error("ERROR response error")
 			}

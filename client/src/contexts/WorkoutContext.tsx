@@ -19,7 +19,11 @@ interface M_CreateWorkoutsAction {
 	type: "CREATE_WORKOUT";
 	payload: M_Workout;
 }
-type M_WorkoutActions = M_SetWorkoutsAction | M_CreateWorkoutsAction;
+interface M_DeleteWorkoutsAction {
+	type: "DELETE_WORKOUT";
+	payload: M_Workout;
+}
+type M_WorkoutActions = M_SetWorkoutsAction | M_CreateWorkoutsAction | M_DeleteWorkoutsAction;
 
 // REDUCER
 const workoutsReducer = (state: M_WorkoutsState, action: M_WorkoutActions) => {
@@ -32,8 +36,12 @@ const workoutsReducer = (state: M_WorkoutsState, action: M_WorkoutActions) => {
 			return {
 				m_workouts: [action.payload, ...state.m_workouts]
 			}
+		case "DELETE_WORKOUT":
+			return {
+				m_workouts: state.m_workouts.filter(m_workout => m_workout._id !== action.payload._id)
+			}
 		default:
-			return state
+			throw new Error("ERROR that action type on workoutsReducer does NOT exist!")
 	}
 }
 

@@ -111,6 +111,7 @@ const workoutsReducer = (state: M_WorkoutsState, action: M_WorkoutActions) => {
 	}
 }
 ```
+20) When using React you have to `RESPONSE.json()` the `POST` item or the `DELETED` item back to the client. This is because the client needs its to update it's local state. Alternatively you can just make react do another fetch of ALL your data but that's not efficient. For delete you need you need at least the `_id` so you can filter the existing items 
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`
@@ -133,6 +134,13 @@ export const CONFIG = {
 ```
 6) Allow easy BUILD and testing of PROD version. => This means having a `src/` and `dist/` as well as the `node_modules/` in root of project. Note you will have to have to make a new custom `tsconfig.json` for the server as the client already has `jsconfig.json` due to vite. Will have to change vite's `public/` folder to be located like so `dist/public`. Ultimately causing dist to look like: `dist/public` + `dist/client` + `dist/server/`
 7) I need a way of providing a contract or something from the server to the client. Such that the client KNOWS that they must send data in a certain schema or else they'll get an error and I'll get intellisense errors. does trpc help with this?
+8) Need to find a better way other than using `m_*` for the mongoose versions of the types. Like the below code is kinda messy and confusing as I'm sometimes using `m_*` and sometimes I'm just using `*Mongoose`
+```ts
+const m_workout = ZodSchemaWorkoutMongoose.parse(json.data)
+```
+
+
+
 
 # STEPS (Remember to test while doing the below)
 1 - Create server repo

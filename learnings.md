@@ -74,6 +74,26 @@ export const ZodSchemaWorkout = z.object({
 	1) mongoose will automatically parse a `"1"` into a `1`
 	2) Zod will NOT automatically parse a `"1"` into a `1`. Instead an error will be thrown!
 17) Server should respond with http status code of `500` or `400` during errors!
+18) This is how you popular and send form data in react
+```ts
+	const [title, setTitle] = useState<string>("")
+	const [reps, setReps] = useState<string>("")
+	const [load, setLoad] = useState<string>("")
+	const [error, setError] = useState<string>("")
+
+
+	const formSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+
+		// Remember to 
+
+		const workout = {
+			title: title,
+			reps: reps
+			load: load,
+		}
+```
+
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`

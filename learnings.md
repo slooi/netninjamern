@@ -73,7 +73,7 @@ export const ZodSchemaWorkout = z.object({
 16) Zod and mongoose differences in parsing:
 	1) mongoose will automatically parse a `"1"` into a `1`
 	2) Zod will NOT automatically parse a `"1"` into a `1`. Instead an error will be thrown!
-
+17) Server should respond with http status code of `500` or `400` during errors!
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`

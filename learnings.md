@@ -91,6 +91,7 @@ export const CONFIG = {
 }
 ```
 6) Allow easy BUILD and testing of PROD version. => This means having a `src/` and `dist/` as well as the `node_modules/` in root of project. Note you will have to have to make a new custom `tsconfig.json` for the server as the client already has `jsconfig.json` due to vite. Will have to change vite's `public/` folder to be located like so `dist/public`. Ultimately causing dist to look like: `dist/public` + `dist/client` + `dist/server/`
+7) I need a way of providing a contract or something from the server to the client. Such that the client KNOWS that they must send data in a certain schema or else they'll get an error and I'll get intellisense errors. does trpc help with this?
 
 # STEPS (Remember to test while doing the below)
 1 - Create server repo

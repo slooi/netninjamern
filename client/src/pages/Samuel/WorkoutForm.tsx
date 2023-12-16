@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { ZodSchemaWorkout } from "../../../../server/validatorsmodelstypes/workouts"
 import { ZodSchemaErrorResponse } from "../../../../server/validatorsmodelstypes/express"
 import { z } from "zod"
@@ -15,11 +15,7 @@ const WorkoutForm = () => {
 
 		// Remember to 
 
-		const workout = {
-			title: "hi",
-			load: "asd",
-			reps: 1
-		}
+		const workout = { title, load, reps }
 
 		try {
 
@@ -39,6 +35,9 @@ const WorkoutForm = () => {
 				const jsonError = ZodSchemaErrorResponse.parse(json)
 				setError(jsonError.error)
 			} else {
+				setTitle("")
+				setLoad("")
+				setReps("")
 				setError("")
 			}
 		} catch (err) {
@@ -54,9 +53,9 @@ const WorkoutForm = () => {
 				<label>Exercise Title:</label>
 				<input name="title" type="text" onChange={e => setTitle(e.target.value)} value={title} />
 				<label>Reps:</label>
-				<input name="reps" type="text" onChange={e => setReps(e.target.value)} value={reps} />
+				<input name="reps" type="number" onChange={e => setReps(e.target.value)} value={reps} />
 				<label>Load (in kg):</label>
-				<input name="load" type="text" onChange={e => setLoad(e.target.value)} value={load} />
+				<input name="load" type="number" onChange={e => setLoad(e.target.value)} value={load} />
 				<button>Add Workout</button>
 			</form>
 		</>

@@ -1,10 +1,13 @@
 import { FormEvent, useState } from "react"
+import { ZodSchemaWorkout } from "../../../../server/validatorsmodelstypes/workouts"
+import { ZodSchemaErrorResponse } from "../../../../server/validatorsmodelstypes/express"
+import { z } from "zod"
 
 const WorkoutForm = () => {
 	const [title, setTitle] = useState<string>("")
 	const [reps, setReps] = useState<string>("")
 	const [load, setLoad] = useState<string>("")
-	const [error, setError] = useState(null)
+	const [error, setError] = useState<string>("")
 
 
 	const formSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -28,12 +31,16 @@ const WorkoutForm = () => {
 				body: JSON.stringify(workout)
 			})
 			const json = await response.json()
+
 			console.log(response.ok)
-			if (!response.ok) {
-				setError(json)
-				throw new Error("ERROR response was not ok")
-			}
 			console.log("json", json)
+
+			if (!response.ok) {
+				const jsonError = ZodSchemaErrorResponse.parse(json)
+				setError(jsonError.error)
+			} else {
+				setError("")
+			}
 		} catch (err) {
 			throw new Error(`${err}`)
 		}
@@ -42,6 +49,7 @@ const WorkoutForm = () => {
 
 	return (
 		<>
+			<h3>Error: {error}</h3>
 			<form className="create" onSubmit={formSubmitHandler}>
 				<label>Exercise Title:</label>
 				<input name="title" type="text" onChange={e => setTitle(e.target.value)} value={title} />

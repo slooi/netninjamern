@@ -68,9 +68,10 @@ app.use("/api", routerWorkouts);
 // #######################################################################
 // 							END ROUTES
 // #######################################################################
-// Handle routes that I haven't implemented
+// Handle routes that I haven't implemented. THIS MUST BE AFTER ALL OTHER ROUTES/MIDDLEWARE (b4 error handler though)
 app.use((req, res, next) => {
-	res.send({ error: "Wrong route, nothing's here :>" })
+	res.status(404).send({ error: "Not found. Wrong route, nothing's here :>" })
+	next()
 })
 
 // THIS MUST BE BELOW ALL OTHER MIDDLEWARE INCLUDING MIDDLEWARE ROUTES (IDK ABOUT just NORMAL ROUTES THOUGH)

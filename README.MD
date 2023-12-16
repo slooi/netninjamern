@@ -2,6 +2,26 @@
 
 # DEVELOPMENT
 
+## Setup
+- The current setup requires you to use **TWO** separate terminal windows. One for the frontend vite server, and one for the backend express server.
+
+1) Clone repo `git clone`
+2) Create another terminal for your client or server
+3) **Client Setup**
+
+	3.1) move into client folder: `cd client`
+
+	3.2) `npm i`
+
+	3.3) Run dev server: `npm run dev`
+4) **Server Setup**
+
+	4.1) move into backend folder: `cd server`
+
+	4.2) `npm i`
+
+	4.3) Run dev server: `npm run dev`
+
 ## On-boarding
 
 ### Server Notes

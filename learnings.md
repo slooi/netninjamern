@@ -93,7 +93,7 @@ export const ZodSchemaWorkout = z.object({
 			load: load,
 		}
 ```
-19) SOLVED REACT NOT RELOAD/REFRESH BUG! The ORDER of destructing the array matters! If you destructure BEFORE the new variable it works but if you do it after it does NOT work for some reason. This is the correct solution:
+19) SOLVED REACT NOT RELOAD/REFRESH BUG! The ORDER of destructing the array matters! You need to put the NEW VARIABLE in BEFORE the old state. This is the correct solution:
 ```ts
 // REDUCER
 const workoutsReducer = (state: M_WorkoutsState, action: M_WorkoutActions) => {

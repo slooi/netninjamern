@@ -6,7 +6,7 @@ dotenv.config();
 // Export Config
 export const CONFIG = {
 	PORT: loadEnvironmentVariable(process.env.PORT),
-	MONGO_URL: loadEnvironmentVariable(process.env.MONGO_URL),
+	MONGO_HOST: loadEnvironmentVariable(process.env.MONGO_HOST),
 	NODE_ENV: loadEnvironmentVariable(process.env.NODE_ENV)
 }
 

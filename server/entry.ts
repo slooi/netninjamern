@@ -7,7 +7,7 @@ import { ModelWorkouts } from "./validatorsmodelstypes/workouts";
 (async function () {
 	try {
 		// Connect to mongodb server
-		await mongoose.connect(CONFIG.MONGO_URL)
+		await mongoose.connect(`mongodb://${CONFIG.MONGO_HOST}:27017/workouts`)
 		console.log("CONNECTED TO MONGODB");
 
 		// Enable mongoose vaidation

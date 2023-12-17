@@ -113,7 +113,7 @@ const workoutsReducer = (state: M_WorkoutsState, action: M_WorkoutActions) => {
 ```
 20) When using React you have to `RESPONSE.json()` the `POST` item or the `DELETED` item back to the client. This is because the client needs its to update it's local state. Alternatively you can just make react do another fetch of ALL your data but that's not efficient. For delete you need you need at least the `_id` so you can filter the existing items 
 21) Do I need to pass in my `dispatch` into the `useEffect`'s dependency array?
-
+22) Save the MONGO_HOST not MONGO_URL in the `.env` file 
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`
@@ -131,7 +131,7 @@ However, I should probably use `slonik` in the future and a `sql` database like 
 ```
 export const CONFIG = {
 	PORT: loadEnvironmentVariable(process.env.PORT),
-	MONGO_URL: loadEnvironmentVariable(process.env.MONGO_URL)
+	MONGO_HOST: loadEnvironmentVariable(process.env.MONGO_HOST)
 }
 ```
 6) Allow easy BUILD and testing of PROD version. => This means having a `src/` and `dist/` as well as the `node_modules/` in root of project. Note you will have to have to make a new custom `tsconfig.json` for the server as the client already has `jsconfig.json` due to vite. Will have to change vite's `public/` folder to be located like so `dist/public`. Ultimately causing dist to look like: `dist/public` + `dist/client` + `dist/server/`

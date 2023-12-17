@@ -1,6 +1,6 @@
 
 
-# DEVELOPMENT
+# DEVELOPMENT (todo)
 
 ## Setup
 - The current setup requires you to use **TWO** separate terminal windows. One for the frontend vite server, and one for the backend express server.

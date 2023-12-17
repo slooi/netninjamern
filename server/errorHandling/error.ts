@@ -41,6 +41,7 @@ process.on('uncaughtException', (error: Error) => {
 	// 1) PERFORM LOGGING
 	// 2) RESTART
 	console.log("!!!!!!!!!!!!! :( !!!!!!!!!!!!!")
+	console.log("!!!!!!!!!!!!! note, if the error was thrown within an async function, then you probably forgot to wrap it with `asyncNextCaller` function !!!!!!!!!!!!!")
 	throw error
 	// if (!errorHandler.isTrustedError(error)) {
 	//   process.exit(1);

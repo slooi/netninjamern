@@ -1,0 +1,35 @@
+services:
+  client:
+    build: ./client
+    container_name: client
+    ports:
+     - 5713:5713
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./client:/usr/src/app
+      - /usr/src/app/
+    environment:
+      - PROXY_TARGET=express_server
+    depends_on:
+      - server
+  server:
+    build: ./server
+    container_name: express_server
+    ports:
+      - 8000:8000
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - PORT=8000
+      - MONGO_HOST=db  # CAN'T BE 127.0.0.1 !!!!!
+      - NODE_ENV=development
+    depends_on: 
+      - db
+  db:
+    build: ./db
+    container_name: db
+    ports:
+     - 27017:27017
+    

@@ -30,10 +30,10 @@ const wrapResponseData = (req: Request, res: Response, next: NextFunction) => {
 };
 app.use(wrapResponseData);
 
+// Parse json
 app.use(express.json())
 
-
-
+// Middleware for visibility
 app.use((req, res, next) => {
 	console.log("req.path req.method:", req.path, req.method);
 	console.log("req.body:", req.body)
@@ -41,6 +41,11 @@ app.use((req, res, next) => {
 });
 
 
+
+
+// #######################################################################
+// 							APPLICATION SPECIFIC CODE
+// #######################################################################
 if (CONFIG.NODE_ENV === "production") {
 	console.log("### code is running in PRODUCTION mode ###")
 
@@ -59,8 +64,6 @@ if (CONFIG.NODE_ENV === "production") {
 
 // Routes
 app.use("/api", routerWorkouts);
-
-
 
 
 

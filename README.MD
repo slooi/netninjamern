@@ -1,6 +1,19 @@
 
+# DEVELOPMENT using Docker
+- **requirements**: 
+	- docker installed
+	- git installed 
 
-# DEVELOPMENT (todo)
+1) Clone repo `git clone <repository-name>`
+
+2) Chang directory into the repo: `cd <repository-name>`
+
+3) To prevent potential conflicts with old docker run: `docker system prune -a`
+
+4) run: `docker-compose up`
+
+
+# DEVELOPMENT (old)
 
 ## Setup
 - The current setup requires you to use **TWO** separate terminal windows. One for the frontend vite server, and one for the backend express server.

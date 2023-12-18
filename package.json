@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev1": "npm run dev --prefix client",
-    "dev": "npm-run-all --parallel dev1"
+    "dev2": "npm run dev --prefix server",
+    "dev": "npm-run-all --parallel dev1 dev2"
   },
   "keywords": [],
   "author": "",

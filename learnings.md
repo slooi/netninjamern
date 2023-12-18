@@ -114,7 +114,7 @@ const workoutsReducer = (state: M_WorkoutsState, action: M_WorkoutActions) => {
 20) When using React you have to `RESPONSE.json()` the `POST` item or the `DELETED` item back to the client. This is because the client needs its to update it's local state. Alternatively you can just make react do another fetch of ALL your data but that's not efficient. For delete you need you need at least the `_id` so you can filter the existing items 
 21) Do I need to pass in my `dispatch` into the `useEffect`'s dependency array?
 22) Save the MONGO_HOST not MONGO_URL in the `.env` file 
-
+23) If you use types derived from zod on the front end, you must `install npm i` on the backend to use said types on the frontend
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`
 

@@ -1,28 +1,50 @@
+
 services:
   clientserver:
-    build: .
-    container_name: client_server
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-     - 5713:5713
-     - 8000:8000
-    stdin_open: true
-    tty: true
-    volumes:
-     - ./client:/usr/src/app/client
-     - /usr/src/app/client/node_modules
-     - ./server:/usr/src/app/server
-     - /usr/src/app/server/node_modules
-     - /usr/src/app/node_modules
+      - "8000:8000"
+      - "5173:5173"
     environment:
       - PROXY_TARGET=127.0.0.1
-      - PORT=8000
-      - MONGO_HOST=db  # CAN'T BE 127.0.0.1 !!!!!
-      - NODE_ENV=development
+      - MONGO_HOST=db
     depends_on:
       - db
   db:
     build: ./db
     container_name: db
     ports:
-     - 27017:27017
+      - 27017:27017
+
+
+
+# services:
+#   clientserver:
+#     build: .
+#     container_name: client_server
+#     ports:
+#      - "5713:5713"
+#     #  - 8000:8000
+#     stdin_open: true
+#     tty: true
+#     # volumes:
+#     #  - ./client:/usr/src/app/client
+#     #  - /usr/src/app/client/node_modules
+#     #  - ./server:/usr/src/app/server
+#     #  - /usr/src/app/server/node_modules
+#     #  - /usr/src/app/node_modules
+#     environment:
+#       # - PROXY_TARGET=127.0.0.1
+#       # - PORT=8000
+#       - MONGO_HOST=db  # CAN'T BE 127.0.0.1 !!!!!
+#       - NODE_ENV=development
+#   #   depends_on:
+#   #     - db
+#   # db:
+#   #   build: ./db
+#   #   container_name: db
+#   #   ports:
+#   #    - 27017:27017
     

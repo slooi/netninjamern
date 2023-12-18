@@ -9,6 +9,7 @@ RUN npm install
 WORKDIR /usr/src/app/server
 COPY ./server/package*.json .
 RUN npm install
+ENV PORT=8000
 COPY ./server .
 EXPOSE 8000
 

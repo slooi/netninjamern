@@ -15,20 +15,20 @@ export const app = express();
 
 
 // wrap <YOUR_DATA> with {data:<YOUR_DATA>} when ever res.json() is called. Only do it if it is not an error
-const wrapResponseData = (req: Request, res: Response, next: NextFunction) => {
-	const originalJson = res.json.bind(res);
+// const wrapResponseData = (req: Request, res: Response, next: NextFunction) => {
+// 	const originalJson = res.json.bind(res);
 
-	// Update the res.json assignment
-	res.json = function (this: Response<any, Record<string, any>>, data: any): Response<any, Record<string, any>> {
-		if (!("error" in data)) {
-			data = { data: data };
-		}
-		return originalJson.call(this, data);
-	};
+// 	// Update the res.json assignment
+// 	res.json = function (this: Response<any, Record<string, any>>, data: any): Response<any, Record<string, any>> {
+// 		if (!("error" in data)) {
+// 			data = { data: data };
+// 		}
+// 		return originalJson.call(this, data);
+// 	};
 
-	next();
-};
-app.use(wrapResponseData);
+// 	next();
+// };
+// app.use(wrapResponseData);
 
 // Parse json
 app.use(express.json())

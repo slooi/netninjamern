@@ -1,6 +1,5 @@
 import { FormEvent, useState } from "react"
 import { ZodSchemaWorkoutMongoose } from "../../../server/validatorsmodelstypes/workouts"
-import { ZodSchemaErrorResponse } from "../../../server/validatorsmodelstypes/express"
 import { useWorkoutContext } from "../hooks/useWorkoutsContext"
 
 const WorkoutForm = () => {
@@ -33,8 +32,7 @@ const WorkoutForm = () => {
 			console.log("json", json)
 
 			if (!response.ok) {
-				const jsonError = ZodSchemaErrorResponse.parse(json)
-				setError(jsonError.error)
+				setError(json)
 			} else {
 				setTitle("")
 				setLoad("")
@@ -42,7 +40,7 @@ const WorkoutForm = () => {
 				setError("")
 
 				// Parse json data into m_workout
-				const m_workout = ZodSchemaWorkoutMongoose.parse(json.data)
+				const m_workout = ZodSchemaWorkoutMongoose.parse(json)
 
 				console.log("dispatch({ type: '', payload: m_workout })")
 				dispatch({ type: "CREATE_WORKOUT", payload: m_workout })

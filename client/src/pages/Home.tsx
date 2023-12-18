@@ -17,36 +17,27 @@ const Home = () => {
 				console.log("res \t", res);
 
 
-				if ("data" in res) {
-					console.log("res.data", res.data)
-					const m_workouts = z.array(ZodSchemaWorkoutMongoose).parse(res.data)
-					console.log("m_workouts \t", m_workouts);
-					dispatch({ type: "SET_WORKOUTS", payload: m_workouts })
-				} else {
-					throw new Error("Error response did not contain data")
-				}
+				console.log("res.data", res)
+				const m_workouts = z.array(ZodSchemaWorkoutMongoose).parse(res)
+				console.log("m_workouts \t", m_workouts);
+				dispatch({ type: "SET_WORKOUTS", payload: m_workouts })
 
 			})
 			.catch(err => { throw new Error(err) })
 	}, [])
 
-	const handleClick = async (m_workout: M_Workout) => {
+	const handleClick = async (m_workout_id: M_Workout["_id"]) => {
 		try {
 			// Get data
-			const response = await fetch(`/api/workouts/${m_workout._id}`, {
+			const response = await fetch(`/api/workouts/${m_workout_id}`, {
 				method: "delete"
 			})
 			const json = await response.json()
 
 
 			console.log("json \t", json)
-			if ("data" in json) {
-				console.log("DELETE json.data \t",)
-				const m_workout = ZodSchemaWorkoutMongoose.parse(json.data)
-				dispatch({ type: "DELETE_WORKOUT", payload: m_workout })
-			} else {
-				throw new Error("ERROR response error")
-			}
+			const m_workout = ZodSchemaWorkoutMongoose.parse(json)
+			dispatch({ type: "DELETE_WORKOUT", payload: m_workout })
 		} catch (err) {
 			throw new Error(`${err}`)
 		}
@@ -67,7 +58,7 @@ const Home = () => {
 							<ul>
 								<li>load:{m_workout.load}</li>
 								<li>reps:{m_workout.reps}</li>
-								<li><button onClick={() => handleClick(m_workout)}>Delete workout</button></li>
+								<li><button onClick={() => handleClick(m_workout._id)}>Delete workout</button></li>
 							</ul>
 						</div>
 					</div>

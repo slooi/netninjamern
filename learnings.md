@@ -115,6 +115,9 @@ const workoutsReducer = (state: M_WorkoutsState, action: M_WorkoutActions) => {
 21) Do I need to pass in my `dispatch` into the `useEffect`'s dependency array?
 22) Save the MONGO_HOST not MONGO_URL in the `.env` file 
 23) If you use types derived from zod on the front end, you must `install npm i` on the backend to use said types on the frontend
+24) DOCKER - order of attaching volumes matter!
+25) docker-compose uses CACHED images. run `docker-compose up --build` if you want updates
+
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`
 

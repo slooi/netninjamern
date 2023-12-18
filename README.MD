@@ -18,9 +18,17 @@
 
 	4.1) move into backend folder: `cd server`
 
-	4.2) `npm i`
+	4.2) create a `.env` with these settings:
 
-	4.3) Run dev server: `npm run dev`
+	```ts
+	PORT=8000
+	MONGO_HOST=127.0.0.1
+	NODE_ENV=development
+	```
+
+	4.3) `npm i`
+
+	4.4) Run dev server: `npm run dev`
 
 ## On-boarding
 

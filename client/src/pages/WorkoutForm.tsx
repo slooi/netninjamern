@@ -1,8 +1,8 @@
 import { FormEvent, useEffect, useState } from "react"
-import { ZodSchemaWorkout, ZodSchemaWorkoutMongoose } from "../../../../server/validatorsmodelstypes/workouts"
-import { ZodSchemaErrorResponse } from "../../../../server/validatorsmodelstypes/express"
+import { ZodSchemaWorkout, ZodSchemaWorkoutMongoose } from "../../../server/validatorsmodelstypes/workouts"
+import { ZodSchemaErrorResponse } from "../../../server/validatorsmodelstypes/express"
 import { z } from "zod"
-import { useWorkoutContext } from "../../hooks/useWorkoutsContext"
+import { useWorkoutContext } from "../hooks/useWorkoutsContext"
 
 const WorkoutForm = () => {
 	const { m_workouts, dispatch } = useWorkoutContext()

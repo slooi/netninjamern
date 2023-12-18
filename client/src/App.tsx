@@ -1,9 +1,9 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Home from './pages/Samuel/Home'
+import Home from './pages/Home'
 import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom'
-import Navbar from './pages/Shared/Navbar'
+import Navbar from './components/Navbar'
 
 function App() {
 	return (

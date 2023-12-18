@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import WorkoutForm from "./WorkoutForm";
-import { useWorkoutContext } from "../../hooks/useWorkoutsContext";
-import { M_Workout, ZodSchemaWorkoutMongoose } from "../../../../server/validatorsmodelstypes/workouts";
+import { useWorkoutContext } from "../hooks/useWorkoutsContext";
+import { M_Workout, ZodSchemaWorkoutMongoose } from "../../../server/validatorsmodelstypes/workouts";
 import { z } from "zod";
 
 

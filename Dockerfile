@@ -6,11 +6,11 @@ COPY ./package*.json .
 RUN npm install
 
 # Setup server
-# WORKDIR /usr/src/app/server
-# COPY ./server/package*.json .
-# RUN npm install
-# COPY ./server .
-# EXPOSE 8000
+WORKDIR /usr/src/app/server
+COPY ./server/package*.json .
+RUN npm install
+COPY ./server .
+EXPOSE 8000
 
 # Setup client
 WORKDIR /usr/src/app/client

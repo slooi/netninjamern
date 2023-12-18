@@ -5,6 +5,9 @@ const proxyTarget = process.env.PROXY_TARGET || '127.0.0.1';
 export default defineConfig({
 	plugins: [react()],
 	server: {
+		watch: {
+			usePolling: true
+		},
 		host: "0.0.0.0",
 		proxy: { "/api": "http://" + proxyTarget + ":8000" }
 	}, build: {

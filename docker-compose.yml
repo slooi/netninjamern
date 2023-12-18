@@ -1,24 +1,21 @@
 
 services:
   clientserver:
-    stdin_open: true
-    tty: true
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
       - 8000:8000
       - 5173:5173
     volumes:
-     - ./client:/usr/src/app/client
+     - /usr/src/app/node_modules
      - /usr/src/app/client/node_modules
-     - ./server:/usr/src/app/server
      - /usr/src/app/server/node_modules
-    #  - /usr/src/app/node_modules
+     - ./client:/usr/src/app/client
+     - ./server:/usr/src/app/server
     environment:
-      - PROXY_TARGET=127.0.0.1
-      - MONGO_HOST=db
-      - NODE_ENV=development
+     - PROXY_TARGET=127.0.0.1
+     - PORT=8000
+     - MONGO_HOST=db
+     - NODE_ENV=development
     depends_on:
       - db
   db:

@@ -1,5 +1,43 @@
 
 # DEVELOPMENT using Docker
+
+## Notes
+
+1) The server will automatically wrap the data passed into `res.json` into an object with a `data` field
+
+For example:
+```ts
+app.get("/", (req, res) => {
+	res.json(
+		[{address:"111 Normal Street"}]
+	)
+})
+```
+Will return 
+```ts
+{
+	data:[{address:"111 Normal Street"}] 
+}
+// normally: [{address:"111 Normal Street"}]
+```
+
+2) All errors that are handled by express will be sent to the client wrapped in an object with a `error` field
+
+For example:
+```ts
+app.get("/", (req, res) => {
+	throw new Error("this is an error")
+})
+```
+Will automatically return:
+```ts
+{
+	error:"this is an error"
+}
+// normally: the server would just crash
+```
+
+## Setup
 - **requirements**: 
 	- docker installed
 	- git installed 

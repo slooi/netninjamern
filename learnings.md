@@ -116,7 +116,7 @@ const workoutsReducer = (state: M_WorkoutsState, action: M_WorkoutActions) => {
 22) Save the MONGO_HOST not MONGO_URL in the `.env` file 
 23) If you use types derived from zod on the front end, you must `install npm i` on the backend to use said types on the frontend
 24) DOCKER - order of attaching volumes matter!
-25) docker-compose uses CACHED images. run `docker-compose up --build` if you want updates
+25) docker-compose uses CACHED images. run `docker-compose up --build` if you want updates. huh I updated the `server/package.json` to use `nodemon -L`(you must use -L to enable legacy mode for file polling as Windows doesn't support modern version), and used `docker-compose up --build` and i got some error which only went away when i did `docker system prune -a` then `docker-compose up`
 
 # Remember
 1) mongoose uses PURAL models `mongoose.model("workouts",SchemaWorkout)`

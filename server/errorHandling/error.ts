@@ -1,34 +1,3 @@
-// class APIError {
-// 	constructor(code, message) {
-// 		this.code = code
-// 		this.message = message
-// 	}
-// 	static badRequest(msg) {
-// 		return new APIError(400, msg)
-// 	}
-// 	static internal(msg) {
-// 		return new APIError(500, msg)
-// 	}
-// }
-
-// function apiErrorHandler(err, req, res, next) {
-// 	// in prod don't use console.log or prod, it's not async
-// 	// use wintons
-// 	console.error(err)
-
-
-// 	if (err instanceof ApiError) {
-// 		res.status(err.code).json()
-// 		return;
-// 	}
-// 	res.status(500).json()
-// }
-
-
-
-
-
-
 import { NextFunction, Request, Response, } from "express";
 
 
@@ -40,7 +9,7 @@ import { NextFunction, Request, Response, } from "express";
 process.on('uncaughtException', (error: Error) => {
 	// 1) PERFORM LOGGING
 	// 2) RESTART
-	console.log("!!!!!!!!!!!!! :( !!!!!!!!!!!!!")
+	console.log("!!!!!!!!!!!!! uncaughtException !!!!!!!!!!!!!")
 	console.log("!!!!!!!!!!!!! note, if the error was thrown within an async function, then you probably forgot to wrap it with `asyncNextCaller` function !!!!!!!!!!!!!")
 	throw error
 	// if (!errorHandler.isTrustedError(error)) {
@@ -100,6 +69,6 @@ export const errorHandlerMiddleware = <T extends Error>(error: T, req: Request, 
 	}
 
 	// Handle unknown error
-	console.log("!!!!!!!!!!!!! UNIDENTIFIED middleware error :( !!!!!!!!!!!!!")
+	console.log("!!!!!!!!!!!!! UNIDENTIFIED middleware error !!!!!!!!!!!!!")
 	return unspecifiedErrorHandler()
 }

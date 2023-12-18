@@ -11,13 +11,6 @@ export const ZodSchemaWorkout = z.object({
 	load: z.number()
 }).strict()
 
-// .strict()
-// try {
-// 	const validatedData = ZodSchemaWorkout.parse({ title: "hi", reps: 1, load: 2, extraField: "ahaha" });
-// 	console.log("Validation successful:");
-// } catch (err) {
-// 	console.error("Validation failed:");
-// }
 
 //#################################################################################################
 //							TYPES
@@ -47,8 +40,6 @@ const SchemaWorkout = new mongoose.Schema<Workout>({
 
 
 
-
-
 //#####################################################################################################
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //									INFERRED SECTION STARTS 
@@ -69,20 +60,6 @@ const ZodAdditionalMongooseTypes = z.object({
 
 export const ZodSchemaWorkoutMongoose = ZodSchemaWorkout.merge(ZodAdditionalMongooseTypes)
 
-// try {
-// 	ZodAdditionalMongooseTypes.parse({
-// 		"title": "ttt",
-// 		"reps": 333,
-// 		"load": 111,
-// 		"_id": "657c8450e564ff7a0d30c7b8",
-// 		"createdAt": "2023-12-15T16:52:32.466Z",
-// 		"updatedAt": "2023-12-15T16:52:32.466Z",
-// 		"__v": 0
-// 	})
-// 	console.log("no error :D!")
-// } catch (err) {
-// 	console.log("error :D!")
-// }
 //#################################################################################################
 //							TYPES INFERRED
 //#################################################################################################
